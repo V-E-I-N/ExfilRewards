@@ -1,0 +1,33 @@
+# Build output
+bin/
+obj/
+
+# IDE / editor files
+.vs/
+.vscode/
+.idea/
+
+# User-specific project files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build logs
+*.log
+
+# Local/reference assemblies
+refs/
+
+# Packaging / temporary files
+publish/
+release/
+dist/
+packages/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Archives
+*.zip

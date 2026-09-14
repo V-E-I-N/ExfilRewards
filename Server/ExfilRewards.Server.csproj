@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>ExfilRewards.Server</AssemblyName>
+    <RootNamespace>ExfilRewards.Server</RootNamespace>
+
+    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Version>1.0.0</Version>
+    <Product>ExfilRewards.Server</Product>
+
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="SPTarkov.Server.Core">
+      <HintPath>refs\SPTarkov.Server.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SPTarkov.DI">
+      <HintPath>refs\SPTarkov.DI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SPTarkov.Common">
+      <HintPath>refs\SPTarkov.Common.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SPTarkov.Reflection">
+      <HintPath>refs\SPTarkov.Reflection.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SemanticVersioning">
+      <HintPath>refs\SemanticVersioning.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>refs\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!--
+    Package the built DLL into the standalone SPT C# mod layout.
+    dotnet build does not reliably run PostBuildEvent targets, so this
+    is bound to AfterTargets="Build" per project rules, and verified
+    against the real build output path on first build.
+  -->
+  <Target Name="PackageMod" AfterTargets="Build">
+    <PropertyGroup>
+      <ModPackageDir>$(MSBuildProjectDirectory)\bin\$(Configuration)\ExfilRewardsServer\</ModPackageDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <ModOutputFiles Include="$(TargetDir)ExfilRewards.Server.dll" />
+    </ItemGroup>
+    <MakeDir Directories="$(ModPackageDir)" Condition="!Exists('$(ModPackageDir)')" />
+    <Copy SourceFiles="@(ModOutputFiles)" DestinationFolder="$(ModPackageDir)" SkipUnchangedFiles="false" />
+  </Target>
+
+</Project>

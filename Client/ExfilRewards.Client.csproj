@@ -1,0 +1,148 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>ExfilRewards.Client</AssemblyName>
+    <RootNamespace>ExfilRewards.Client</RootNamespace>
+
+    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Version>1.0.0</Version>
+    <Product>ExfilRewards.Client</Product>
+
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="BepInEx">
+      <HintPath>refs\BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>refs\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>refs\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Comfort">
+      <HintPath>refs\Comfort.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>refs\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>refs\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>refs\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>refs\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>refs\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>refs\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>refs\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>refs\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="spt-common">
+      <HintPath>refs\spt-common.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sirenix.Serialization">
+      <HintPath>refs\Sirenix.Serialization.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <!--
+    All 14 PNGs are embedded directly into the DLL instead of shipping as a
+    loose "assets" folder. LogicalName is set explicitly (rather than relying
+    on the SDK's auto-generated RootNamespace+FolderPath+FileName scheme) so
+    the exact resource string is unambiguous and matches
+    RaidRewardPopup.AssetResourcePrefix + fileName precisely.
+  -->
+  <ItemGroup>
+    <EmbeddedResource Include="assets\panel_background_pmc.png">
+      <LogicalName>ExfilRewards.Client.assets.panel_background_pmc.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\panel_background_scav.png">
+      <LogicalName>ExfilRewards.Client.assets.panel_background_scav.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\fullscreen_bg_pmc.png">
+      <LogicalName>ExfilRewards.Client.assets.fullscreen_bg_pmc.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\fullscreen_bg_scav.png">
+      <LogicalName>ExfilRewards.Client.assets.fullscreen_bg_scav.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\tile_roubles_large.png">
+      <LogicalName>ExfilRewards.Client.assets.tile_roubles_large.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\tile_euros_large.png">
+      <LogicalName>ExfilRewards.Client.assets.tile_euros_large.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\tile_dollars_large.png">
+      <LogicalName>ExfilRewards.Client.assets.tile_dollars_large.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\tile_roubles_small.png">
+      <LogicalName>ExfilRewards.Client.assets.tile_roubles_small.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\tile_euros_small.png">
+      <LogicalName>ExfilRewards.Client.assets.tile_euros_small.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\tile_dollars_small.png">
+      <LogicalName>ExfilRewards.Client.assets.tile_dollars_small.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\confirm_box_pmc.png">
+      <LogicalName>ExfilRewards.Client.assets.confirm_box_pmc.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\confirm_box_scav.png">
+      <LogicalName>ExfilRewards.Client.assets.confirm_box_scav.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\title_pmc.png">
+      <LogicalName>ExfilRewards.Client.assets.title_pmc.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\title_scav.png">
+      <LogicalName>ExfilRewards.Client.assets.title_scav.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!--
+    dotnet build does not reliably run PostBuildEvent targets (see project rules),
+    so packaging is bound to AfterTargets="Build" and verified against the real
+    build output path on first build. No assets folder is copied anymore - all
+    PNGs are embedded resources baked into the DLL itself.
+  -->
+  <Target Name="PackageMod" AfterTargets="Build">
+    <PropertyGroup>
+      <ModPackageDir>$(MSBuildProjectDirectory)\bin\$(Configuration)\ExfilRewardsClient\BepInEx\plugins\ExfilRewardsClient\</ModPackageDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <ModOutputFiles Include="$(TargetDir)ExfilRewards.Client.dll" />
+    </ItemGroup>
+    <MakeDir Directories="$(ModPackageDir)" Condition="!Exists('$(ModPackageDir)')" />
+    <Copy SourceFiles="@(ModOutputFiles)" DestinationFolder="$(ModPackageDir)" SkipUnchangedFiles="false" />
+  </Target>
+
+</Project>
