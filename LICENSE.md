@@ -19,7 +19,7 @@ the source public does not grant permission to redistribute the mod or
 derivative versions.
 
 For permission to redistribute, modify and redistribute, or include this mod
-in another project, contact froze (vein).
+in another project, contact froze (V-E-I-N).
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
